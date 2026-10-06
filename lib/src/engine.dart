@@ -8,7 +8,29 @@ import 'side.dart';
 /// server-backed strong engine (same interface, a network call inside)
 /// are interchangeable — see design doc §3-1 "端末内の軽量実装とサーバー
 /// 強AI（v1.2）を同じ形で差し替え".
+///
+/// Getting faster (better search: transposition tables, move ordering,
+/// iterative deepening, ...) and getting smarter (a better evaluation —
+/// hand-tuned, statistics-updated, or learned) are both purely internal
+/// to an implementation; neither needs an interface change, only a new
+/// build of the same `Engine<P>`. [modelVersion] exists for the one part
+/// that *does* need a shared hook: design doc §4 "AIの強化" plans
+/// periodically retraining the evaluation and shipping updated model data
+/// (v1.5 opening statistics, v2 a learned evaluation), gated by an
+/// automated new-model-vs-old-model validation match before rollout, with
+/// rollback if it regresses. That validation is just self-play through
+/// this same interface — but it needs to tell the two engines apart.
 abstract interface class Engine<P extends Position> {
+  /// Identifies the model/evaluation data this instance currently runs,
+  /// e.g. `'builtin'` for a hand-tuned evaluation with no separate data
+  /// file, or a version string/hash for downloaded model data. Two
+  /// `Engine`s with different [modelVersion]s are what a model-rollout
+  /// service plays against each other to decide whether to ship an
+  /// update; loading a new model is otherwise just constructing a new
+  /// `Engine` instance — not part of this interface, since how model data
+  /// is fetched and parsed is entirely game- and format-specific.
+  String get modelVersion;
+
   /// Picks a move for `position.sideToMove`.
   ///
   /// [level] is 1 = weakest, higher = stronger; each implementation
