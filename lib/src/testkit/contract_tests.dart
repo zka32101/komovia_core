@@ -1,6 +1,7 @@
 import 'package:test/test.dart';
 
 import '../game.dart';
+import '../game_record.dart';
 import '../game_result.dart';
 import '../move.dart';
 import '../position.dart';
@@ -11,8 +12,8 @@ import '../position.dart';
 /// own `test/` directory so core and each game agree on what "a legal
 /// `Game` implementation" means — see design doc §2b "契約テスト" and §6
 /// stage-1 passing condition. This is deliberately a *skeleton*: legal
-/// moves, win/loss, notation round-trip, and position serialization, not
-/// an exhaustive rules checker for any one game.
+/// moves, win/loss, notation round-trip, and kifu round-trip, not an
+/// exhaustive rules checker for any one game.
 ///
 /// [samplePosition] should return a position reachable from
 /// `game.initialPosition()` (the initial position itself is fine) to
@@ -34,6 +35,14 @@ void runGameContractTests<P extends Position>(
     test('legalMoves on the initial position is non-empty', () {
       final pos = game.initialPosition();
       expect(game.legalMoves(pos), isNotEmpty);
+    });
+
+    test('legalMoves accepts an optional history argument', () {
+      // Smoke test for games whose legality depends on history (e.g. go's
+      // positional superko, see Game.legalMoves) — this does not assert
+      // the result differs, only that the parameter is accepted.
+      final pos = game.initialPosition();
+      expect(() => game.legalMoves(pos, history: [pos]), returnsNormally);
     });
 
     test('every legal move can be applied without throwing', () {
@@ -76,9 +85,9 @@ void runGameContractTests<P extends Position>(
       const maxPly = 200; // guards against a buggy Game looping forever
       for (var i = 0; i < maxPly; i++) {
         if (!game.result(pos, history: history).isOngoing) return;
-        final legal = game.legalMoves(pos);
+        final legal = game.legalMoves(pos, history: history);
         if (legal.isEmpty) return;
-        pos = game.apply(pos, legal.first);
+        pos = game.apply(pos, legal.first, history: history);
         history = [...history, pos];
       }
     });
@@ -97,5 +106,39 @@ void runGameContractTests<P extends Position>(
         throwsFormatException,
       );
     });
+
+    test(
+        'kifu round-trip: exportRecord(importRecord(exportRecord(record))) '
+        'equals exportRecord(record)', () {
+      final record = _selfPlayRecord(game);
+      final notation = game.exportRecord(record);
+      final imported = game.importRecord(notation);
+      expect(game.exportRecord(imported), notation);
+    });
+
+    test('importRecord rejects garbage input', () {
+      expect(
+        () => game.importRecord('not a valid kifu \x00'),
+        throwsFormatException,
+      );
+    });
   });
+}
+
+/// Plays a few plies from the initial position to build a small
+/// game-agnostic [GameRecord], for [Game.exportRecord]/[importRecord] to
+/// round-trip against.
+GameRecord _selfPlayRecord<P extends Position>(Game<P> game) {
+  var pos = game.initialPosition();
+  final moves = <RecordedMove>[];
+  const maxPly = 8;
+  for (var i = 0; i < maxPly; i++) {
+    if (!game.result(pos).isOngoing) break;
+    final legal = game.legalMoves(pos);
+    if (legal.isEmpty) break;
+    final move = legal.first;
+    moves.add(RecordedMove(number: i + 1, side: pos.sideToMove, move: move));
+    pos = game.apply(pos, move);
+  }
+  return GameRecord(gameId: game.id, moves: moves, result: game.result(pos));
 }
