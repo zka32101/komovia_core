@@ -1,0 +1,21 @@
+name: komovia_core
+description: >
+  Game-agnostic infrastructure for Komovia's board games (shogi, go, chess,
+  ...): the Game/Engine/BoardRenderer/GameRecord/Puzzle/HandicapRule
+  interfaces and a shared contract-test kit, independent of any one game's
+  rules or UI framework.
+version: 0.1.0
+publish_to: "none"
+
+environment:
+  sdk: ^3.3.0
+
+dependencies:
+  # Regular dependency (not dev_dependencies): testkit.dart exposes
+  # runGameContractTests() for OTHER packages (komovia_shogi, komovia_go,
+  # ...) to call from their own test/ directories, so package:test must be
+  # resolvable for those consumers too.
+  test: ^1.25.0
+
+dev_dependencies:
+  lints: ^4.0.0
