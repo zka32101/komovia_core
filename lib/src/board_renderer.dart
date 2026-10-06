@@ -20,21 +20,27 @@ class BoardOffset {
   const BoardOffset(this.dx, this.dy);
 }
 
-/// Draws a [Position] and converts taps/clicks back to board [Square]s.
+/// Builds the renderable board for a [Position] and converts taps/clicks
+/// back to board [Square]s.
 ///
-/// [C] is the drawing surface — a Flutter `Canvas` in every real
-/// implementation — left generic so komovia_core itself stays Flutter-free.
-/// Each game package implements one `BoardRenderer<ItsPosition, Canvas>`;
-/// the app layer calls it from a `CustomPainter`.
-abstract interface class BoardRenderer<P extends Position, C> {
-  /// Paints [position] onto [canvas], sized to [size].
+/// [W] is a Flutter `Widget` in every real implementation — left generic
+/// so komovia_core itself stays Flutter-free. [build] returns [W] rather
+/// than painting onto an externally supplied canvas: komovia_shogi's actual
+/// board (checked against `zka32101/kouki-shogi`'s `MiniBoardWidget`) is a
+/// `StatelessWidget` that composes a background `CustomPainter`
+/// (`BoardPainter`) with one piece-shaped `CustomPainter` (`KomaPainter`)
+/// per occupied square inside a widget tree — not one flat
+/// `paint(Canvas, ...)` call — so the shared contract needs to hand back
+/// something a game screen can drop into its widget tree, not a canvas
+/// callback. A game is free to implement [build] with `CustomPaint`
+/// layers, a plain widget tree, or anything else that produces a [W].
+abstract interface class BoardRenderer<P extends Position, W> {
+  /// Builds the board for [position].
   ///
   /// [lastMove] highlights the most recent move, [hints] highlights
   /// candidate squares (e.g. legal destinations for a selected piece, or a
   /// puzzle hint), and [selected] highlights the currently selected square.
-  void paint(
-    C canvas,
-    BoardSize size,
+  W build(
     P position, {
     Move? lastMove,
     List<Square> hints = const [],
