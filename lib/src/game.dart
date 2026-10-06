@@ -24,37 +24,50 @@ abstract interface class Game<P extends Position> {
   /// games.
   P initialPosition({Map<String, Object?> options = const {}});
 
+  /// A cheap, `==`/`hashCode`-comparable key for [position]: equal keys
+  /// mean "the same board state" for repetition/superko purposes. Two
+  /// positions that differ only in ways the game's repetition rule
+  /// ignores (e.g. move-count-only bookkeeping) may share a key.
+  ///
+  /// Exists so [legalMoves]/[apply]/[result]'s `historyKeys` can track
+  /// history as these cheap keys instead of full [P] instances — a self-
+  /// play loop generating training data over thousands of games only
+  /// needs to keep `List<Object>` per game, not every [Position] it ever
+  /// visited. A game that already has a canonical string form may just
+  /// delegate to [encode].
+  Object positionKey(P position);
+
   /// Every move legal for `position.sideToMove` in [position].
   ///
   /// Does not include [ResignMove] — resigning is always available
   /// independent of the position; see [apply].
   ///
-  /// [history] is the sequence of positions leading up to and including
-  /// [position] (oldest first). Most rules need only [position] itself
-  /// (shogi, chess, simple-ko go with the ko point stored on [Position]),
-  /// but a few need the full game: go's *positional superko* rule forbids
-  /// recreating any earlier board, not just the immediately preceding one,
-  /// which cannot be decided from [position] alone. Games that don't need
-  /// history may ignore this parameter.
-  List<Move> legalMoves(P position, {List<P> history = const []});
+  /// [historyKeys] is `positionKey` of every position leading up to and
+  /// including [position] (oldest first). Most rules need only [position]
+  /// itself (shogi, chess, simple-ko go with the ko point stored on
+  /// [Position]), but a few need the full game: go's *positional superko*
+  /// rule forbids recreating any earlier board, not just the immediately
+  /// preceding one, which cannot be decided from [position] alone. Games
+  /// that don't need history may ignore this parameter.
+  List<Move> legalMoves(P position, {List<Object> historyKeys = const []});
 
   /// Applies [move] to [position] and returns the resulting position.
   /// [position] itself is left unmodified.
   ///
-  /// Accepts any move in `legalMoves(position, history: history)`, plus a
-  /// [ResignMove] for `position.sideToMove` at any time. Throws
-  /// [ArgumentError] for any other move. [history] mirrors
+  /// Accepts any move in `legalMoves(position, historyKeys: historyKeys)`,
+  /// plus a [ResignMove] for `position.sideToMove` at any time. Throws
+  /// [ArgumentError] for any other move. [historyKeys] mirrors
   /// [legalMoves]'s — pass it whenever the game's legality can depend on
   /// it (e.g. go's superko) so `apply` can reject the same moves
   /// `legalMoves` would have excluded.
-  P apply(P position, Move move, {List<P> history = const []});
+  P apply(P position, Move move, {List<Object> historyKeys = const []});
 
   /// The outcome of [position], or [GameResult.ongoing] if play continues.
   ///
-  /// [history] is the sequence of positions leading up to and including
-  /// [position] (oldest first) — needed for repetition (千日手) and ko
-  /// (コウ) checks. Games that don't need history may ignore it.
-  GameResult result(P position, {List<P> history = const []});
+  /// [historyKeys] is `positionKey` of every position leading up to and
+  /// including [position] (oldest first) — needed for repetition (千日手)
+  /// and ko (コウ) checks. Games that don't need history may ignore it.
+  GameResult result(P position, {List<Object> historyKeys = const []});
 
   /// Serializes [position] — a single snapshot, not a game history — in
   /// this game's standard position notation (SFEN for shogi, FEN for

@@ -19,11 +19,14 @@ class TicTacToeGame implements Game<TicTacToePosition> {
   }
 
   @override
+  Object positionKey(TicTacToePosition position) => encode(position);
+
+  @override
   List<Move> legalMoves(
     TicTacToePosition position, {
-    List<TicTacToePosition> history = const [],
+    List<Object> historyKeys = const [],
   }) {
-    // Tic-tac-toe's legality never depends on history; history is unused.
+    // Tic-tac-toe's legality never depends on history; historyKeys is unused.
     if (!result(position).isOngoing) return const [];
     return [
       for (var i = 0; i < 9; i++)
@@ -36,7 +39,7 @@ class TicTacToeGame implements Game<TicTacToePosition> {
   TicTacToePosition apply(
     TicTacToePosition position,
     Move move, {
-    List<TicTacToePosition> history = const [],
+    List<Object> historyKeys = const [],
   }) {
     switch (move) {
       case DropMove(to: final to):
@@ -59,7 +62,7 @@ class TicTacToeGame implements Game<TicTacToePosition> {
   }
 
   @override
-  GameResult result(TicTacToePosition position, {List<TicTacToePosition> history = const []}) {
+  GameResult result(TicTacToePosition position, {List<Object> historyKeys = const []}) {
     if (position.resignedBy != null) {
       return GameResult.win(position.resignedBy!.opponent, WinReason.resignation);
     }

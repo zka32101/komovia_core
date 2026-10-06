@@ -37,12 +37,20 @@ void runGameContractTests<P extends Position>(
       expect(game.legalMoves(pos), isNotEmpty);
     });
 
-    test('legalMoves accepts an optional history argument', () {
+    test('positionKey is stable and comparable', () {
+      final pos = game.initialPosition();
+      expect(game.positionKey(pos), game.positionKey(pos));
+    });
+
+    test('legalMoves accepts an optional historyKeys argument', () {
       // Smoke test for games whose legality depends on history (e.g. go's
       // positional superko, see Game.legalMoves) — this does not assert
       // the result differs, only that the parameter is accepted.
       final pos = game.initialPosition();
-      expect(() => game.legalMoves(pos, history: [pos]), returnsNormally);
+      expect(
+        () => game.legalMoves(pos, historyKeys: [game.positionKey(pos)]),
+        returnsNormally,
+      );
     });
 
     test('every legal move can be applied without throwing', () {
@@ -81,14 +89,14 @@ void runGameContractTests<P extends Position>(
         'result once legalMoves is exhausted or result stops being '
         'ongoing', () {
       var pos = game.initialPosition();
-      var history = <P>[pos];
+      var historyKeys = <Object>[game.positionKey(pos)];
       const maxPly = 200; // guards against a buggy Game looping forever
       for (var i = 0; i < maxPly; i++) {
-        if (!game.result(pos, history: history).isOngoing) return;
-        final legal = game.legalMoves(pos, history: history);
+        if (!game.result(pos, historyKeys: historyKeys).isOngoing) return;
+        final legal = game.legalMoves(pos, historyKeys: historyKeys);
         if (legal.isEmpty) return;
-        pos = game.apply(pos, legal.first, history: history);
-        history = [...history, pos];
+        pos = game.apply(pos, legal.first, historyKeys: historyKeys);
+        historyKeys = [...historyKeys, game.positionKey(pos)];
       }
     });
 
