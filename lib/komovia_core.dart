@@ -10,6 +10,7 @@ library;
 export 'src/app_notification.dart';
 export 'src/board_renderer.dart';
 export 'src/engine.dart';
+export 'src/friendship.dart';
 export 'src/game.dart';
 export 'src/game_record.dart';
 export 'src/game_result.dart';
