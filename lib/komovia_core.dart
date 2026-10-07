@@ -9,14 +9,17 @@ library;
 
 export 'src/app_notification.dart';
 export 'src/board_renderer.dart';
+export 'src/direct_message.dart';
 export 'src/engine.dart';
 export 'src/friendship.dart';
 export 'src/game.dart';
 export 'src/game_record.dart';
 export 'src/game_result.dart';
 export 'src/handicap_rule.dart';
+export 'src/leaderboard.dart';
 export 'src/move.dart';
 export 'src/position.dart';
 export 'src/puzzle.dart';
 export 'src/side.dart';
 export 'src/square.dart';
+export 'src/tournament.dart';
