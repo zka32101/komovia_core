@@ -21,6 +21,7 @@ export 'src/move.dart';
 export 'src/position.dart';
 export 'src/promoted_app.dart';
 export 'src/puzzle.dart';
+export 'src/shareable_moment.dart';
 export 'src/side.dart';
 export 'src/square.dart';
 export 'src/tournament.dart';
