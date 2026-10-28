@@ -19,6 +19,7 @@ export 'src/game_result.dart';
 export 'src/handicap_rule.dart';
 export 'src/leaderboard.dart';
 export 'src/move.dart';
+export 'src/onboarding.dart';
 export 'src/position.dart';
 export 'src/promoted_app.dart';
 export 'src/puzzle.dart';
