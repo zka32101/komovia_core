@@ -10,6 +10,7 @@ library;
 export 'src/ad_gate.dart';
 export 'src/app_notification.dart';
 export 'src/board_renderer.dart';
+export 'src/clock.dart';
 export 'src/direct_message.dart';
 export 'src/engine.dart';
 export 'src/entitlement.dart';
