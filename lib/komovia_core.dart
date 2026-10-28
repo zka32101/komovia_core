@@ -24,6 +24,7 @@ export 'src/position.dart';
 export 'src/promoted_app.dart';
 export 'src/puzzle.dart';
 export 'src/rating.dart';
+export 'src/review.dart';
 export 'src/shareable_moment.dart';
 export 'src/side.dart';
 export 'src/square.dart';
