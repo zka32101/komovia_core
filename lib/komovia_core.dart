@@ -21,6 +21,7 @@ export 'src/game_record.dart';
 export 'src/game_result.dart';
 export 'src/handicap_rule.dart';
 export 'src/leaderboard.dart';
+export 'src/matchmaking.dart';
 export 'src/move.dart';
 export 'src/onboarding.dart';
 export 'src/position.dart';
