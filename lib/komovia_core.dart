@@ -9,6 +9,7 @@ library;
 
 export 'src/ad_gate.dart';
 export 'src/app_notification.dart';
+export 'src/avatar.dart';
 export 'src/board_renderer.dart';
 export 'src/clock.dart';
 export 'src/daily_streak.dart';
