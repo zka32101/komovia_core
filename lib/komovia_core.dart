@@ -15,6 +15,7 @@ export 'src/daily_streak.dart';
 export 'src/direct_message.dart';
 export 'src/engine.dart';
 export 'src/entitlement.dart';
+export 'src/fair_play.dart';
 export 'src/friendship.dart';
 export 'src/game.dart';
 export 'src/game_record.dart';
