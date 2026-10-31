@@ -84,7 +84,8 @@ class GameAnalysis {
     final own = movesBy(side);
     if (own.isEmpty) return 100;
     final goodOrBest = own
-        .where((m) => m.quality == MoveQuality.best || m.quality == MoveQuality.good)
+        .where((m) =>
+            m.quality == MoveQuality.best || m.quality == MoveQuality.good)
         .length;
     return goodOrBest / own.length * 100;
   }

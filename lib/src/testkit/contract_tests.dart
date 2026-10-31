@@ -85,7 +85,8 @@ void runGameContractTests<P extends Position>(
       expect(result.reason, WinReason.resignation);
     });
 
-    test('playing legal moves to the end only ever reaches a terminal '
+    test(
+        'playing legal moves to the end only ever reaches a terminal '
         'result once legalMoves is exhausted or result stops being '
         'ongoing', () {
       var pos = game.initialPosition();
@@ -100,8 +101,7 @@ void runGameContractTests<P extends Position>(
       }
     });
 
-    test('notation round-trip: encode(decode(encode(position))) is stable',
-        () {
+    test('notation round-trip: encode(decode(encode(position))) is stable', () {
       final pos = samplePosition();
       final notation = game.encode(pos);
       final decoded = game.decode(notation);

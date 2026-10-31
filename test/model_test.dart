@@ -33,7 +33,8 @@ void main() {
       );
       expect(const PassMove(), const PassMove());
       expect(const ResignMove(Side.first), const ResignMove(Side.first));
-      expect(const ResignMove(Side.first), isNot(const ResignMove(Side.second)));
+      expect(
+          const ResignMove(Side.first), isNot(const ResignMove(Side.second)));
     });
 
     test('Move is a closed (sealed) set switchable without a default case', () {
@@ -75,8 +76,14 @@ void main() {
       const record = GameRecord(
         gameId: 'tictactoe',
         moves: [
-          RecordedMove(number: 1, side: Side.first, move: DropMove(pieceType: 'mark', to: Square(1, 1))),
-          RecordedMove(number: 2, side: Side.second, move: DropMove(pieceType: 'mark', to: Square(0, 0))),
+          RecordedMove(
+              number: 1,
+              side: Side.first,
+              move: DropMove(pieceType: 'mark', to: Square(1, 1))),
+          RecordedMove(
+              number: 2,
+              side: Side.second,
+              move: DropMove(pieceType: 'mark', to: Square(0, 0))),
         ],
         result: GameResult.ongoing,
         metadata: {'event': 'komovia_core unit test'},

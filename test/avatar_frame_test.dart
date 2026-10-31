@@ -8,7 +8,8 @@ void main() {
     });
 
     test('true when the id is in the unlocked set', () {
-      expect(AvatarFrame.isUnlocked('gold_dan', {'gold_dan', 'streak_7'}), isTrue);
+      expect(
+          AvatarFrame.isUnlocked('gold_dan', {'gold_dan', 'streak_7'}), isTrue);
     });
 
     test('false when the id is not in the unlocked set', () {
@@ -24,7 +25,8 @@ void main() {
     });
 
     test('accepts an explicit tier', () {
-      const frame = AvatarFrame(id: 'dan_9', name: '九段', tier: FrameTier.platinum);
+      const frame =
+          AvatarFrame(id: 'dan_9', name: '九段', tier: FrameTier.platinum);
       expect(frame.tier, FrameTier.platinum);
     });
   });

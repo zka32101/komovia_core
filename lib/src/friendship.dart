@@ -92,15 +92,15 @@ class Friendship {
   }
 
   Map<String, Object?> toJson() => {
-    'uid': uid,
-    'friendUid': friendUid,
-    'displayName': displayName,
-    'status': status,
-    'requestedBy': requestedBy,
-    'blockedBy': blockedBy,
-    'addedAt': addedAt.toIso8601String(),
-    'lastPlayedAt': lastPlayedAt?.toIso8601String(),
-  };
+        'uid': uid,
+        'friendUid': friendUid,
+        'displayName': displayName,
+        'status': status,
+        'requestedBy': requestedBy,
+        'blockedBy': blockedBy,
+        'addedAt': addedAt.toIso8601String(),
+        'lastPlayedAt': lastPlayedAt?.toIso8601String(),
+      };
 
   factory Friendship.fromJson(Map<String, Object?> json) {
     return Friendship(

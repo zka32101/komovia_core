@@ -15,7 +15,8 @@ class TicTacToeGame implements Game<TicTacToePosition> {
 
   @override
   TicTacToePosition initialPosition({Map<String, Object?> options = const {}}) {
-    return TicTacToePosition(cells: List.filled(9, null), sideToMove: Side.first);
+    return TicTacToePosition(
+        cells: List.filled(9, null), sideToMove: Side.first);
   }
 
   @override
@@ -62,9 +63,11 @@ class TicTacToeGame implements Game<TicTacToePosition> {
   }
 
   @override
-  GameResult result(TicTacToePosition position, {List<Object> historyKeys = const []}) {
+  GameResult result(TicTacToePosition position,
+      {List<Object> historyKeys = const []}) {
     if (position.resignedBy != null) {
-      return GameResult.win(position.resignedBy!.opponent, WinReason.resignation);
+      return GameResult.win(
+          position.resignedBy!.opponent, WinReason.resignation);
     }
     for (final line in _lines) {
       final a = position.cells[line[0]];
@@ -123,7 +126,8 @@ class TicTacToeGame implements Game<TicTacToePosition> {
     final cells = parts[0].split('').map(parseCell).toList();
     final turn = parseTurn(parts[1]);
     final resigned = parts[2] == '-' ? null : parseCell(parts[2]);
-    return TicTacToePosition(cells: cells, sideToMove: turn, resignedBy: resigned);
+    return TicTacToePosition(
+        cells: cells, sideToMove: turn, resignedBy: resigned);
   }
 
   // --- GameRecord <-> notation ---------------------------------------
@@ -184,7 +188,8 @@ class TicTacToeGame implements Game<TicTacToePosition> {
           promote: t[5] == '1',
         );
       case 'D' when t.length == 4:
-        return DropMove(pieceType: t[1], to: Square(int.parse(t[2]), int.parse(t[3])));
+        return DropMove(
+            pieceType: t[1], to: Square(int.parse(t[2]), int.parse(t[3])));
       case 'P' when t.length == 1:
         return const PassMove();
       case 'R' when t.length == 2:

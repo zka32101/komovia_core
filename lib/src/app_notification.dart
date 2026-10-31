@@ -75,16 +75,16 @@ class AppNotification {
   /// ISO8601 strings) — storage-agnostic, unlike `goen`'s original
   /// `toFirestore`/`fromFirestore` (which stored `Timestamp` directly).
   Map<String, Object?> toJson() => {
-    'id': id,
-    'uid': uid,
-    'title': title,
-    'body': body,
-    'data': data,
-    'type': type,
-    'isRead': isRead,
-    'createdAt': createdAt.toIso8601String(),
-    'readAt': readAt?.toIso8601String(),
-  };
+        'id': id,
+        'uid': uid,
+        'title': title,
+        'body': body,
+        'data': data,
+        'type': type,
+        'isRead': isRead,
+        'createdAt': createdAt.toIso8601String(),
+        'readAt': readAt?.toIso8601String(),
+      };
 
   factory AppNotification.fromJson(Map<String, Object?> json) {
     return AppNotification(
@@ -146,12 +146,12 @@ class NotificationPreference {
   }
 
   Map<String, Object?> toJson() => {
-    'allNotifications': allNotifications,
-    'friendRequests': friendRequests,
-    'gameInvitations': gameInvitations,
-    'tournamentUpdates': tournamentUpdates,
-    'achievements': achievements,
-  };
+        'allNotifications': allNotifications,
+        'friendRequests': friendRequests,
+        'gameInvitations': gameInvitations,
+        'tournamentUpdates': tournamentUpdates,
+        'achievements': achievements,
+      };
 
   factory NotificationPreference.fromJson(Map<String, Object?> json) {
     return NotificationPreference(

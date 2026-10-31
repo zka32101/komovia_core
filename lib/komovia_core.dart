@@ -15,6 +15,7 @@ export 'src/avatar_frame.dart';
 export 'src/board_renderer.dart';
 export 'src/clock.dart';
 export 'src/cosmetic_item.dart';
+export 'src/daily_quota.dart';
 export 'src/daily_streak.dart';
 export 'src/direct_message.dart';
 export 'src/engine.dart';

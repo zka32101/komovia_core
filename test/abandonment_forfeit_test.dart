@@ -61,8 +61,8 @@ void main() {
     });
 
     test('slow preset uses 48 hours', () {
-      expect(AbandonmentForfeitPolicy.slow.threshold,
-          const Duration(hours: 48));
+      expect(
+          AbandonmentForfeitPolicy.slow.threshold, const Duration(hours: 48));
       expect(
           AbandonmentForfeitPolicy.slow.canClaim(
               isClaimantsTurn: false,

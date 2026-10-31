@@ -40,7 +40,8 @@ abstract interface class Engine<P extends Position> {
   /// komovia_shogi's `AI.bestMoveTimed` iteratively deepens until the
   /// budget is spent rather than searching to a fixed depth. Returns null
   /// if [position] has no legal moves.
-  Future<Move?> bestMove(P position, {required int level, Duration? timeBudget});
+  Future<Move?> bestMove(P position,
+      {required int level, Duration? timeBudget});
 
   /// A static evaluation of [position], fixed to [Side.first]'s
   /// perspective: positive favors [Side.first], 0 is balanced, negative

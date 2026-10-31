@@ -28,7 +28,8 @@ void main() {
 
   group('clampRemaining', () {
     test('a positive duration is unchanged', () {
-      expect(clampRemaining(const Duration(seconds: 5)), const Duration(seconds: 5));
+      expect(clampRemaining(const Duration(seconds: 5)),
+          const Duration(seconds: 5));
     });
 
     test('a negative duration clamps to zero', () {
@@ -56,23 +57,28 @@ void main() {
 
   group('warningLevelFor', () {
     test('above 1 minute is normal', () {
-      expect(warningLevelFor(const Duration(minutes: 1, seconds: 1)), ClockWarningLevel.normal);
+      expect(warningLevelFor(const Duration(minutes: 1, seconds: 1)),
+          ClockWarningLevel.normal);
     });
 
     test('exactly 1 minute is low (inclusive threshold)', () {
-      expect(warningLevelFor(const Duration(minutes: 1)), ClockWarningLevel.low);
+      expect(
+          warningLevelFor(const Duration(minutes: 1)), ClockWarningLevel.low);
     });
 
     test('between 10s and 1 minute is low', () {
-      expect(warningLevelFor(const Duration(seconds: 30)), ClockWarningLevel.low);
+      expect(
+          warningLevelFor(const Duration(seconds: 30)), ClockWarningLevel.low);
     });
 
     test('exactly 10 seconds is critical (inclusive threshold)', () {
-      expect(warningLevelFor(const Duration(seconds: 10)), ClockWarningLevel.critical);
+      expect(warningLevelFor(const Duration(seconds: 10)),
+          ClockWarningLevel.critical);
     });
 
     test('under 10 seconds is critical', () {
-      expect(warningLevelFor(const Duration(seconds: 1)), ClockWarningLevel.critical);
+      expect(warningLevelFor(const Duration(seconds: 1)),
+          ClockWarningLevel.critical);
     });
 
     test('custom thresholds are honored', () {
@@ -93,7 +99,8 @@ void main() {
     });
 
     test('shows centiseconds under 60 seconds when enabled', () {
-      expect(formatClock(const Duration(seconds: 9, milliseconds: 340)), '00:09.34');
+      expect(formatClock(const Duration(seconds: 9, milliseconds: 340)),
+          '00:09.34');
     });
 
     test('omits centiseconds at or above 60 seconds even when enabled', () {
@@ -102,7 +109,8 @@ void main() {
 
     test('omits centiseconds when showCentiseconds is false', () {
       expect(
-        formatClock(const Duration(seconds: 9, milliseconds: 340), showCentiseconds: false),
+        formatClock(const Duration(seconds: 9, milliseconds: 340),
+            showCentiseconds: false),
         '00:09',
       );
     });

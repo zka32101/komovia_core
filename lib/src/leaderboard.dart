@@ -64,18 +64,18 @@ class LeaderboardEntry {
   }
 
   Map<String, Object?> toJson() => {
-    'uid': uid,
-    'displayName': displayName,
-    'rank': rank,
-    'rating': rating,
-    'gamesPlayed': gamesPlayed,
-    'wins': wins,
-    'winRate': winRate,
-    'puzzlesSolved': puzzlesSolved,
-    'achievementsUnlocked': achievementsUnlocked,
-    'tournamentWins': tournamentWins,
-    'lastUpdated': lastUpdated.toIso8601String(),
-  };
+        'uid': uid,
+        'displayName': displayName,
+        'rank': rank,
+        'rating': rating,
+        'gamesPlayed': gamesPlayed,
+        'wins': wins,
+        'winRate': winRate,
+        'puzzlesSolved': puzzlesSolved,
+        'achievementsUnlocked': achievementsUnlocked,
+        'tournamentWins': tournamentWins,
+        'lastUpdated': lastUpdated.toIso8601String(),
+      };
 
   factory LeaderboardEntry.fromJson(Map<String, Object?> json) {
     return LeaderboardEntry(

@@ -230,7 +230,7 @@ FairPlaySignal computeFairPlaySignal(List<double> centipawnLosses) {
     stdDevCentipawnLoss: stdDev,
     topMoveMatchRate: topMoveMatchRate,
     suspicionScore: suspicionScore,
-    reviewRecommended:
-        n >= minMovesForFairPlaySignal && suspicionScore >= fairPlayReviewThreshold,
+    reviewRecommended: n >= minMovesForFairPlaySignal &&
+        suspicionScore >= fairPlayReviewThreshold,
   );
 }

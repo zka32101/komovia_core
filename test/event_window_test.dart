@@ -56,8 +56,12 @@ void main() {
     });
 
     test('returns null for null input', () {
-      expect(EventWindow.tryParse(startIso: null, endIso: '2026-11-15T00:00:00Z'), isNull);
-      expect(EventWindow.tryParse(startIso: '2026-11-01T00:00:00Z', endIso: null), isNull);
+      expect(
+          EventWindow.tryParse(startIso: null, endIso: '2026-11-15T00:00:00Z'),
+          isNull);
+      expect(
+          EventWindow.tryParse(startIso: '2026-11-01T00:00:00Z', endIso: null),
+          isNull);
     });
 
     test('returns null for empty strings', () {
@@ -65,7 +69,10 @@ void main() {
     });
 
     test('returns null for malformed strings', () {
-      expect(EventWindow.tryParse(startIso: 'not-a-date', endIso: '2026-11-15T00:00:00Z'), isNull);
+      expect(
+          EventWindow.tryParse(
+              startIso: 'not-a-date', endIso: '2026-11-15T00:00:00Z'),
+          isNull);
     });
 
     test('returns null when end is not after start', () {

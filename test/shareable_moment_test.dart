@@ -56,7 +56,8 @@ Komovia囲碁''');
 
       final caption = buildShareCaption(
         moment,
-        storeUrl: 'https://play.google.com/store/apps/details?id=com.yourwish.shogi',
+        storeUrl:
+            'https://play.google.com/store/apps/details?id=com.yourwish.shogi',
       );
 
       expect(

@@ -69,7 +69,8 @@ void main() {
     });
 
     test('fromString defaults unrecognized values to allTime', () {
-      expect(LeaderboardPeriod.fromString('garbage'), LeaderboardPeriod.allTime);
+      expect(
+          LeaderboardPeriod.fromString('garbage'), LeaderboardPeriod.allTime);
     });
   });
 

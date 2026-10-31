@@ -83,14 +83,14 @@ class PromotedApp {
   }
 
   Map<String, Object?> toJson() => {
-    'appId': appId,
-    'name': name,
-    'tagline': tagline,
-    'category': category,
-    'iconPath': iconPath,
-    'iosStoreUrl': iosStoreUrl,
-    'androidStoreUrl': androidStoreUrl,
-  };
+        'appId': appId,
+        'name': name,
+        'tagline': tagline,
+        'category': category,
+        'iconPath': iconPath,
+        'iosStoreUrl': iosStoreUrl,
+        'androidStoreUrl': androidStoreUrl,
+      };
 
   factory PromotedApp.fromJson(Map<String, Object?> json) {
     return PromotedApp(
@@ -112,7 +112,8 @@ class PromotedApp {
 List<PromotedApp> otherKomoviaApps(
   List<PromotedApp> roster,
   String currentAppId,
-) => roster.where((app) => app.appId != currentAppId).toList();
+) =>
+    roster.where((app) => app.appId != currentAppId).toList();
 
 /// Sentinel used by [PromotedApp.copyWith] to distinguish "not passed"
 /// from an explicit `null`, so a nullable field can actually be cleared.
