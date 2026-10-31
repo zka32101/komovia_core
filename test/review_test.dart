@@ -28,8 +28,7 @@ class _CountingEngine implements Engine<TicTacToePosition> {
       throw UnimplementedError();
 
   @override
-  Future<Move?> findForcedWin(TicTacToePosition position,
-          {required int maxPly}) =>
+  Future<Move?> findForcedWin(TicTacToePosition position, {required int maxPly}) =>
       throw UnimplementedError();
 }
 
@@ -47,18 +46,10 @@ void main() {
   GameRecord recordOf(List<RecordedMove> moves) =>
       GameRecord(gameId: 'g', moves: moves, result: GameResult.ongoing);
 
-  test(
-      'every move drops the counting engine eval by exactly 1 for its own side, so loss is 0 and quality is best',
-      () async {
+  test('every move drops the counting engine eval by exactly 1 for its own side, so loss is 0 and quality is best', () async {
     final record = recordOf([
-      RecordedMove(
-          number: 1,
-          side: Side.first,
-          move: DropMove(pieceType: 'mark', to: Square(0, 0))),
-      RecordedMove(
-          number: 2,
-          side: Side.second,
-          move: DropMove(pieceType: 'mark', to: Square(1, 0))),
+      RecordedMove(number: 1, side: Side.first, move: DropMove(pieceType: 'mark', to: Square(0, 0))),
+      RecordedMove(number: 2, side: Side.second, move: DropMove(pieceType: 'mark', to: Square(1, 0))),
     ]);
 
     final analysis = await review.analyzeGame(record, game.initialPosition());
@@ -73,8 +64,7 @@ void main() {
     expect(analysis.blunders, isEmpty);
   });
 
-  test('classifyMoveQuality matches komovia_chess thresholds (15/50/100/300)',
-      () {
+  test('classifyMoveQuality matches komovia_chess thresholds (15/50/100/300)', () {
     expect(classifyMoveQuality(0), MoveQuality.best);
     expect(classifyMoveQuality(14.9), MoveQuality.best);
     expect(classifyMoveQuality(15), MoveQuality.good);
@@ -87,9 +77,7 @@ void main() {
     expect(classifyMoveQuality(1000), MoveQuality.blunder);
   });
 
-  test(
-      'loss is clamped to 0 rather than going negative when a move improves the mover\'s own eval',
-      () async {
+  test('loss is clamped to 0 rather than going negative when a move improves the mover\'s own eval', () async {
     // second's mark does not change first's piece count, so from first's
     // perspective the eval is unchanged after second's move — but the
     // raw swing is computed as (after - before) for second, which here
@@ -99,23 +87,15 @@ void main() {
     // case rather than asserting a negative-swing scenario the counting
     // engine can't produce.
     final record = recordOf([
-      RecordedMove(
-          number: 1,
-          side: Side.first,
-          move: DropMove(pieceType: 'mark', to: Square(0, 0))),
+      RecordedMove(number: 1, side: Side.first, move: DropMove(pieceType: 'mark', to: Square(0, 0))),
     ]);
     final analysis = await review.analyzeGame(record, game.initialPosition());
     expect(analysis.moves.single.loss, greaterThanOrEqualTo(0));
   });
 
-  test(
-      'a side that made no moves gets 100% accuracy rather than dividing by zero',
-      () async {
+  test('a side that made no moves gets 100% accuracy rather than dividing by zero', () async {
     final record = recordOf([
-      RecordedMove(
-          number: 1,
-          side: Side.first,
-          move: DropMove(pieceType: 'mark', to: Square(0, 0))),
+      RecordedMove(number: 1, side: Side.first, move: DropMove(pieceType: 'mark', to: Square(0, 0))),
     ]);
     final analysis = await review.analyzeGame(record, game.initialPosition());
     expect(analysis.accuracyFor(Side.second), 100);
@@ -123,18 +103,9 @@ void main() {
 
   test('onProgress is called once per move with (done, total)', () async {
     final record = recordOf([
-      RecordedMove(
-          number: 1,
-          side: Side.first,
-          move: DropMove(pieceType: 'mark', to: Square(0, 0))),
-      RecordedMove(
-          number: 2,
-          side: Side.second,
-          move: DropMove(pieceType: 'mark', to: Square(1, 0))),
-      RecordedMove(
-          number: 3,
-          side: Side.first,
-          move: DropMove(pieceType: 'mark', to: Square(2, 0))),
+      RecordedMove(number: 1, side: Side.first, move: DropMove(pieceType: 'mark', to: Square(0, 0))),
+      RecordedMove(number: 2, side: Side.second, move: DropMove(pieceType: 'mark', to: Square(1, 0))),
+      RecordedMove(number: 3, side: Side.first, move: DropMove(pieceType: 'mark', to: Square(2, 0))),
     ]);
 
     final calls = <(int, int)>[];

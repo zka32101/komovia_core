@@ -83,19 +83,16 @@ void main() {
       expect(signal.meanCentipawnLoss, lessThan(5));
       expect(signal.stdDevCentipawnLoss, lessThan(10));
       expect(signal.topMoveMatchRate, greaterThan(0.9));
-      expect(
-          signal.suspicionScore, greaterThanOrEqualTo(fairPlayReviewThreshold));
+      expect(signal.suspicionScore, greaterThanOrEqualTo(fairPlayReviewThreshold));
       expect(signal.reviewRecommended, isTrue);
     });
 
-    test(
-        'same clean stats but only just past the floor: weaker score than the long game',
-        () {
+    test('same clean stats but only just past the floor: weaker score than the long game', () {
       final rand = Random(42);
-      final shortClean = List<double>.generate(
-          minMovesForFairPlaySignal, (i) => rand.nextDouble() * 3);
-      final longClean = List<double>.generate(
-          movesForFullFairPlayConfidence, (i) => rand.nextDouble() * 3);
+      final shortClean =
+          List<double>.generate(minMovesForFairPlaySignal, (i) => rand.nextDouble() * 3);
+      final longClean =
+          List<double>.generate(movesForFullFairPlayConfidence, (i) => rand.nextDouble() * 3);
 
       final shortSignal = computeFairPlaySignal(shortClean);
       final longSignal = computeFairPlaySignal(longClean);

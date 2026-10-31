@@ -113,23 +113,23 @@ class Tournament {
   }
 
   Map<String, Object?> toJson() => {
-        'id': id,
-        'name': name,
-        'description': description,
-        'startDate': startDate.toIso8601String(),
-        'endDate': endDate.toIso8601String(),
-        'maxParticipants': maxParticipants,
-        'format': format,
-        'status': status,
-        'participantUids': participantUids,
-        'winnerId': winnerId,
-        'createdBy': createdBy,
-        'boardSize': boardSize,
-        'lastAdvancedRound': lastAdvancedRound,
-        'isAutoWeekly': isAutoWeekly,
-        'totalRounds': totalRounds,
-        'createdAt': createdAt.toIso8601String(),
-      };
+    'id': id,
+    'name': name,
+    'description': description,
+    'startDate': startDate.toIso8601String(),
+    'endDate': endDate.toIso8601String(),
+    'maxParticipants': maxParticipants,
+    'format': format,
+    'status': status,
+    'participantUids': participantUids,
+    'winnerId': winnerId,
+    'createdBy': createdBy,
+    'boardSize': boardSize,
+    'lastAdvancedRound': lastAdvancedRound,
+    'isAutoWeekly': isAutoWeekly,
+    'totalRounds': totalRounds,
+    'createdAt': createdAt.toIso8601String(),
+  };
 
   factory Tournament.fromJson(Map<String, Object?> json) {
     return Tournament(
@@ -187,14 +187,14 @@ class TournamentParticipant {
   });
 
   Map<String, Object?> toJson() => {
-        'tournamentId': tournamentId,
-        'uid': uid,
-        'displayName': displayName,
-        'seed': seed,
-        'currentRound': currentRound,
-        'currentRanking': currentRanking,
-        'joinedAt': joinedAt.toIso8601String(),
-      };
+    'tournamentId': tournamentId,
+    'uid': uid,
+    'displayName': displayName,
+    'seed': seed,
+    'currentRound': currentRound,
+    'currentRanking': currentRanking,
+    'joinedAt': joinedAt.toIso8601String(),
+  };
 
   factory TournamentParticipant.fromJson(Map<String, Object?> json) {
     return TournamentParticipant(
@@ -259,19 +259,19 @@ class TournamentMatch {
   bool get isCompleted => status == 'completed';
 
   Map<String, Object?> toJson() => {
-        'id': id,
-        'tournamentId': tournamentId,
-        'player1Uid': player1Uid,
-        'player1DisplayName': player1DisplayName,
-        'player2Uid': player2Uid,
-        'player2DisplayName': player2DisplayName,
-        'round': round,
-        'winnerUid': winnerUid,
-        'status': status,
-        'gameId': gameId,
-        'scheduledAt': scheduledAt.toIso8601String(),
-        'completedAt': completedAt?.toIso8601String(),
-      };
+    'id': id,
+    'tournamentId': tournamentId,
+    'player1Uid': player1Uid,
+    'player1DisplayName': player1DisplayName,
+    'player2Uid': player2Uid,
+    'player2DisplayName': player2DisplayName,
+    'round': round,
+    'winnerUid': winnerUid,
+    'status': status,
+    'gameId': gameId,
+    'scheduledAt': scheduledAt.toIso8601String(),
+    'completedAt': completedAt?.toIso8601String(),
+  };
 
   factory TournamentMatch.fromJson(Map<String, Object?> json) {
     return TournamentMatch(

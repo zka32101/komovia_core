@@ -4,8 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('CosmeticItem.isFreeForAll', () {
     test('true when no iapProductId and not subscription-included', () {
-      const item =
-          CosmeticItem(id: 'wood', category: 'boardSkin', name: 'Wood');
+      const item = CosmeticItem(id: 'wood', category: 'boardSkin', name: 'Wood');
       expect(item.isFreeForAll, isTrue);
     });
 
@@ -32,8 +31,7 @@ void main() {
 
   group('CosmeticItem.isOwnedBy', () {
     test('free-for-all item is always owned', () {
-      const item =
-          CosmeticItem(id: 'wood', category: 'boardSkin', name: 'Wood');
+      const item = CosmeticItem(id: 'wood', category: 'boardSkin', name: 'Wood');
       expect(
         item.isOwnedBy(hasActiveSubscription: false, purchasedProductIds: {}),
         isTrue,
@@ -77,8 +75,7 @@ void main() {
       );
     });
 
-    test('purchasable item also includedWithSubscription is owned either way',
-        () {
+    test('purchasable item also includedWithSubscription is owned either way', () {
       const item = CosmeticItem(
         id: 'kaya',
         category: 'boardSkin',

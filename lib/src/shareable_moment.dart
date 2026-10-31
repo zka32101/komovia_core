@@ -105,9 +105,7 @@ String buildShareCaption(ShareableMoment moment, {String? storeUrl}) {
 
   lines.add('');
   lines.add(
-    moment.hashtag == null
-        ? moment.appName
-        : '${moment.appName} ${moment.hashtag}',
+    moment.hashtag == null ? moment.appName : '${moment.appName} ${moment.hashtag}',
   );
 
   if (storeUrl != null && storeUrl.isNotEmpty) {

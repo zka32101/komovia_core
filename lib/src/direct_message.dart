@@ -47,14 +47,14 @@ class MessageThread {
   int unreadCountFor(String uid) => unreadCount[uid] ?? 0;
 
   Map<String, Object?> toJson() => {
-        'id': id,
-        'participantUids': participantUids,
-        'participantNames': participantNames,
-        'lastMessage': lastMessage,
-        'lastMessageAt': lastMessageAt?.toIso8601String(),
-        'lastSenderUid': lastSenderUid,
-        'unreadCount': unreadCount,
-      };
+    'id': id,
+    'participantUids': participantUids,
+    'participantNames': participantNames,
+    'lastMessage': lastMessage,
+    'lastMessageAt': lastMessageAt?.toIso8601String(),
+    'lastSenderUid': lastSenderUid,
+    'unreadCount': unreadCount,
+  };
 
   factory MessageThread.fromJson(Map<String, Object?> json) {
     return MessageThread(
@@ -92,11 +92,11 @@ class DirectMessage {
   });
 
   Map<String, Object?> toJson() => {
-        'id': id,
-        'fromUid': fromUid,
-        'content': content,
-        'sentAt': sentAt.toIso8601String(),
-      };
+    'id': id,
+    'fromUid': fromUid,
+    'content': content,
+    'sentAt': sentAt.toIso8601String(),
+  };
 
   factory DirectMessage.fromJson(Map<String, Object?> json) {
     return DirectMessage(

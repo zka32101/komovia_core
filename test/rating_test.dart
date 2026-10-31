@@ -30,8 +30,7 @@ void main() {
       expect(delta, 0);
     });
 
-    test('beating a stronger opponent gains more than beating an equal one',
-        () {
+    test('beating a stronger opponent gains more than beating an equal one', () {
       final vsEqual = computeEloDelta(
         currentRating: 1200,
         opponentRating: 1200,
@@ -45,8 +44,7 @@ void main() {
       expect(vsStronger, greaterThan(vsEqual));
     });
 
-    test('losing to a weaker opponent loses more than losing to an equal one',
-        () {
+    test('losing to a weaker opponent loses more than losing to an equal one', () {
       final vsEqual = computeEloDelta(
         currentRating: 1200,
         opponentRating: 1200,
@@ -99,14 +97,12 @@ void main() {
     });
 
     test('clamps out-of-range levels instead of extrapolating', () {
-      final atMax =
-          ratingForAiLevel(level: 10, minLevel: 1, maxLevel: 10, baseLevel: 5);
+      final atMax = ratingForAiLevel(level: 10, minLevel: 1, maxLevel: 10, baseLevel: 5);
       final beyondMax =
           ratingForAiLevel(level: 99, minLevel: 1, maxLevel: 10, baseLevel: 5);
       expect(beyondMax, atMax);
 
-      final atMin =
-          ratingForAiLevel(level: 1, minLevel: 1, maxLevel: 10, baseLevel: 5);
+      final atMin = ratingForAiLevel(level: 1, minLevel: 1, maxLevel: 10, baseLevel: 5);
       final belowMin =
           ratingForAiLevel(level: -3, minLevel: 1, maxLevel: 10, baseLevel: 5);
       expect(belowMin, atMin);

@@ -4,19 +4,19 @@ import 'package:test/test.dart';
 void main() {
   group('Tournament', () {
     Tournament build({String status = 'upcoming'}) => Tournament(
-          id: 't1',
-          name: 'Spring Open',
-          description: 'desc',
-          startDate: DateTime.utc(2026, 1, 1),
-          endDate: DateTime.utc(2026, 1, 8),
-          maxParticipants: 8,
-          format: 'single_elimination',
-          status: status,
-          participantUids: const ['u1', 'u2'],
-          createdBy: 'u1',
-          boardSize: 19,
-          createdAt: DateTime.utc(2025, 12, 1),
-        );
+      id: 't1',
+      name: 'Spring Open',
+      description: 'desc',
+      startDate: DateTime.utc(2026, 1, 1),
+      endDate: DateTime.utc(2026, 1, 8),
+      maxParticipants: 8,
+      format: 'single_elimination',
+      status: status,
+      participantUids: const ['u1', 'u2'],
+      createdBy: 'u1',
+      boardSize: 19,
+      createdAt: DateTime.utc(2025, 12, 1),
+    );
 
     test('round-trips through toJson/fromJson', () {
       final t = build();
@@ -50,8 +50,7 @@ void main() {
       expect(cleared.winnerId, isNull);
     });
 
-    test('createdBy is preserved across copyWith (immutable after creation)',
-        () {
+    test('createdBy is preserved across copyWith (immutable after creation)', () {
       final t = build();
       final updated = t.copyWith(status: 'active');
       expect(updated.createdBy, t.createdBy);
@@ -96,14 +95,14 @@ void main() {
 
     test('status getters', () {
       TournamentMatch withStatus(String status) => TournamentMatch(
-            id: 'm1',
-            tournamentId: 't1',
-            player1Uid: 'u1',
-            player2Uid: 'u2',
-            round: 1,
-            status: status,
-            scheduledAt: DateTime.utc(2026, 1, 1),
-          );
+        id: 'm1',
+        tournamentId: 't1',
+        player1Uid: 'u1',
+        player2Uid: 'u2',
+        round: 1,
+        status: status,
+        scheduledAt: DateTime.utc(2026, 1, 1),
+      );
       expect(withStatus('pending').isPending, isTrue);
       expect(withStatus('in_progress').isInProgress, isTrue);
       expect(withStatus('completed').isCompleted, isTrue);

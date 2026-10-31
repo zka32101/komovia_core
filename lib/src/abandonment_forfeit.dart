@@ -32,7 +32,8 @@ class AbandonmentForfeitPolicy {
     DateTime? now,
   }) {
     if (isClaimantsTurn || lastActivityAt == null) return false;
-    return remaining(lastActivityAt: lastActivityAt, now: now) == Duration.zero;
+    return remaining(lastActivityAt: lastActivityAt, now: now) ==
+        Duration.zero;
   }
 
   /// Time left until a forfeit becomes claimable, or [Duration.zero] once

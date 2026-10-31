@@ -27,9 +27,7 @@ void main() {
       expect(restored.lastPlayedAt, friendship.lastPlayedAt);
     });
 
-    test(
-        'requestedBy/blockedBy/lastPlayedAt are optional and round-trip as null',
-        () {
+    test('requestedBy/blockedBy/lastPlayedAt are optional and round-trip as null', () {
       final friendship = Friendship(
         uid: 'user-1',
         friendUid: 'user-2',
@@ -95,9 +93,7 @@ void main() {
       expect(updated.requestedBy, friendship.requestedBy);
     });
 
-    test(
-        'copyWith can explicitly clear requestedBy/blockedBy/lastPlayedAt to null',
-        () {
+    test('copyWith can explicitly clear requestedBy/blockedBy/lastPlayedAt to null', () {
       final friendship = Friendship(
         uid: 'u1',
         friendUid: 'u2',

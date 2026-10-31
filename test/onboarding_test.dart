@@ -73,8 +73,7 @@ void main() {
       expect(progress.completedStepIds, contains('capture-demo'));
     });
 
-    test(
-        'completedStepIds accumulates across multiple markStepCompleted '
+    test('completedStepIds accumulates across multiple markStepCompleted '
         'calls', () {
       var progress = OnboardingProgress(steps: steps);
       progress = progress.markStepCompleted('rules-1');

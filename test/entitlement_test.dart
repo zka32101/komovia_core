@@ -27,7 +27,8 @@ void main() {
       expect(restored.expiresAt, entitlement.expiresAt);
     });
 
-    test('a lifetime entitlement has no expiresAt and round-trips as null', () {
+    test('a lifetime entitlement has no expiresAt and round-trips as null',
+        () {
       final entitlement = Entitlement(
         isActive: true,
         plan: SubscriptionPlan.lifetime,
@@ -41,8 +42,7 @@ void main() {
       expect(restored.isCurrentlyActive(), isTrue);
     });
 
-    test(
-        'isCurrentlyActive re-derives from expiresAt rather than trusting '
+    test('isCurrentlyActive re-derives from expiresAt rather than trusting '
         'a stale isActive flag', () {
       final expired = Entitlement(
         isActive: true,
@@ -51,8 +51,10 @@ void main() {
         expiresAt: DateTime.utc(2020, 2, 1),
       );
 
-      expect(expired.isCurrentlyActive(now: DateTime.utc(2026, 1, 1)), isFalse);
-      expect(expired.isCurrentlyActive(now: DateTime.utc(2020, 1, 15)), isTrue);
+      expect(expired.isCurrentlyActive(now: DateTime.utc(2026, 1, 1)),
+          isFalse);
+      expect(expired.isCurrentlyActive(now: DateTime.utc(2020, 1, 15)),
+          isTrue);
     });
 
     test('isCurrentlyActive is false whenever isActive itself is false', () {
@@ -79,8 +81,7 @@ void main() {
       expect(upgraded.startedAt, entitlement.startedAt);
     });
 
-    test(
-        'an unrecognized stored plan name falls back to monthly rather '
+    test('an unrecognized stored plan name falls back to monthly rather '
         'than throwing', () {
       final restored = Entitlement.fromJson({
         'isActive': true,
@@ -92,13 +93,13 @@ void main() {
 
   group('SubscriptionPlan.entitlementLength', () {
     test('monthly is 30 days', () {
-      expect(
-          SubscriptionPlan.monthly.entitlementLength, const Duration(days: 30));
+      expect(SubscriptionPlan.monthly.entitlementLength,
+          const Duration(days: 30));
     });
 
     test('annual is 365 days', () {
-      expect(
-          SubscriptionPlan.annual.entitlementLength, const Duration(days: 365));
+      expect(SubscriptionPlan.annual.entitlementLength,
+          const Duration(days: 365));
     });
 
     test('lifetime never expires', () {
