@@ -7,6 +7,7 @@
 /// `package:komovia_core/testkit.dart`.
 library;
 
+export 'src/abandonment_forfeit.dart';
 export 'src/ad_gate.dart';
 export 'src/app_notification.dart';
 export 'src/avatar.dart';
